@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DHIVE - AI Marketplace | Buy & Sell AI Tools, Templates & Automation</title>
+    <meta name="description" content="DHIVE is the marketplace for AI tools, automation solutions, templates, and digital products. Creators keep 85-90% of revenue. Find the perfect AI solution for your business.">
+    <meta name="keywords" content="AI marketplace, AI tools, automation, templates, chatbots, lead generation, South Africa, digital products">
+    <meta name="author" content="BoschTech">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="DHIVE - AI Marketplace">
+    <meta property="og:description" content="Discover AI tools, courses, templates & automation solutions. Creators earn 85-90%.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dhive.vercel.app">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DHIVE - AI Marketplace">
+    <meta name="twitter:description" content="Discover AI tools, courses, templates & automation solutions.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐝</text></svg>">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="logo" onclick="App.navigate('marketplace')">
+                <span class="logo-icon">🐝</span>
+                <span>DHIVE</span>
+            </div>
+
+            <div class="search-container">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-input" id="searchInput" placeholder="Search AI tools, templates, courses...">
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+
+            <div class="nav-links" id="navLinks">
+                <button class="nav-link" onclick="App.navigate('sell')">Sell Your Items</button>
+                <button class="nav-link" onclick="App.navigate('build')">Build AI Tool</button>
+                <button class="nav-link" onclick="App.navigate('support')">Support</button>
+                <button class="nav-link" onclick="Wishlist.togglePanel()">
+                    Wishlist
+                    <span class="nav-link-badge" id="wishlistCount" style="display: none;">0</span>
+                </button>
+                <button class="nav-link" id="userNameDisplay" style="display: none;"></button>
+                <button class="nav-link" id="signInBtn" onclick="App.navigate('login')">Sign In</button>
+                <div class="cart-icon" onclick="Cart.toggle()">
+                    🛒
+                    <span class="cart-count" id="cartCount" style="display: none;">0</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main App Container -->
+    <main id="app"></main>
+
+    <!-- Cart Overlay -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+    <!-- Cart Panel -->
+    <aside class="cart-panel" id="cartPanel">
+        <div class="cart-header">
+            <h2>🛒 Shopping Cart</h2>
+            <button class="cart-close" onclick="Cart.toggle()">×</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty">
+                <div class="cart-empty-icon">🛒</div>
+                <p>Your cart is empty</p>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span class="cart-total-amount" id="cartTotal">R0</span>
+            </div>
+            <button class="btn-primary btn-block" onclick="Cart.checkout()">
+                Proceed to Checkout
+            </button>
+        </div>
+    </aside>
+
+    <!-- Wishlist Panel -->
+    <aside class="wishlist-panel" id="wishlistPanel">
+        <div class="cart-header">
+            <h2>❤️ Wishlist</h2>
+            <button class="cart-close" onclick="Wishlist.togglePanel()">×</button>
+        </div>
+        <div class="cart-items" id="wishlistItems">
+            <div class="cart-empty">
+                <div class="cart-empty-icon">❤️</div>
+                <p>Your wishlist is empty</p>
+            </div>
+        </div>
+    </aside>
+
+    <!-- AI Chatbot -->
+    <button class="chatbot-bubble" id="chatbotBubble" onclick="Chatbot.toggle()">💬</button>
+    
+    <div class="chatbot-panel" id="chatbotPanel">
+        <div class="chatbot-header">
+            <div class="chatbot-header-title">DHIVE Assistant</div>
+            <button class="chatbot-close" onclick="Chatbot.toggle()">×</button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="chatbot-message bot">
+                Hi! 👋 I'm your DHIVE assistant. I can help you find products, answer questions about pricing, integrations, and more. What can I help you with?
+            </div>
+        </div>
+        <div class="chatbot-input-container">
+            <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Ask me anything...">
+            <button class="chatbot-send" onclick="Chatbot.send()">Send</button>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div class="modal-overlay" id="productDetailModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="document.getElementById('productDetailModal').classList.remove('open')">×</button>
+            <div id="productDetailContent"></div>
+        </div>
+    </div>
+
+    <!-- Checkout/Payment Modal -->
+    <div class="modal-overlay" id="paymentModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="document.getElementById('paymentModal').classList.remove('open')">×</button>
+            <h2 class="modal-title">Complete Your Order</h2>
+            
+            <p style="color: #64748b; margin-bottom: 20px;">
+                Fill in your details and we'll contact you to complete your purchase:
+            </p>
+            
+            <form id="checkoutForm">
+                <div class="form-group">
+                    <input type="text" id="checkoutName" class="form-input" placeholder="Full Name *" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="checkoutEmail" class="form-input" placeholder="Email Address *" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="checkoutPhone" class="form-input" placeholder="Phone Number *" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="checkoutCompany" class="form-input" placeholder="Company Name *" required>
+                </div>
+                <div class="form-group">
+                    <textarea id="checkoutMessage" class="form-textarea" placeholder="Any special requirements?" rows="3"></textarea>
+                </div>
+            </form>
+            
+            <div style="background: #f8fafc; padding: 16px; border-radius: 8px; margin: 20px 0;">
+                <p style="font-weight: 600; margin-bottom: 12px; font-size: 14px;">Order Summary:</p>
+                <div id="checkoutSummary"></div>
+            </div>
+            
+            <div style="display: flex; gap: 12px;">
+                <button class="btn-primary" style="flex: 1;" onclick="Cart.submitCheckout()">
+                    ✉️ Send Order Request
+                </button>
+                <button class="btn-secondary" style="flex: 1;" onclick="document.getElementById('paymentModal').classList.remove('open')">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>🐝 DHIVE</h4>
+                <p>The AI marketplace for digital products, tools, and automation solutions. Built for creators, powered by innovation.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Marketplace</h4>
+                <ul class="footer-links">
+                    <li><a href="#" onclick="App.navigate('marketplace'); App.filterProducts({category: 'AI & Automation'});">AI & Automation</a></li>
+                    <li><a href="#" onclick="App.navigate('marketplace'); App.filterProducts({category: 'Templates'});">Templates</a></li>
+                    <li><a href="#" onclick="App.navigate('marketplace'); App.filterProducts({category: 'Online Courses'});">Online Courses</a></li>
+                    <li><a href="#" onclick="App.navigate('marketplace'); App.filterProducts({category: 'Plugins'});">Plugins</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>For Creators</h4>
+                <ul class="footer-links">
+                    <li><a href="#" onclick="App.navigate('sell')">Sell Your Products</a></li>
+                    <li><a href="#" onclick="App.navigate('build')">Build AI Tools</a></li>
+                    <li><a href="#" onclick="App.navigate('support')">Get Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <ul class="footer-links">
+                    <li><a href="mailto:trevorbosch4@gmail.com">trevorbosch4@gmail.com</a></li>
+                    <li><a href="#" onclick="App.navigate('support')">Support Request</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 DHIVE. Powered by <a href="#" onclick="alert('BoschTech - South African AI Solutions')">BoschTech</a></p>
+        </div>
+    </footer>
+
+    <!-- Scripts (order matters!) -->
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/chatbot.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
