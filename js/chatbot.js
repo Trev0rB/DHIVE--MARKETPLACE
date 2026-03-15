@@ -140,7 +140,7 @@ const Chatbot = {
         
         // Selling
         if (this.matches(msg, ['sell', 'selling', 'list my', 'become seller', 'creator'])) {
-            return "Want to sell on DHIVE? 💸<br><br>As a creator, you keep <strong>85-90% of revenue</strong>!<br><br>Click 'Sell Your Items' in the menu to access the seller dashboard. You can list AI tools, templates, courses, ebooks - whatever you've built!";
+            return "Want to sell on DHIVE? 💸<br><br>As a creator, you keep <strong>100% of revenue</strong>!<br><br>Click 'Sell Your Items' in the menu to access the seller dashboard. You can list AI tools, templates, courses, ebooks - whatever you've built!";
         }
         
         // Building
@@ -150,7 +150,7 @@ const Chatbot = {
         
         // About DHIVE
         if (this.matches(msg, ['what is dhive', 'about dhive', 'tell me about', 'how does this work'])) {
-            return "DHIVE is an AI marketplace where you can:<br><br>🛒 <strong>Buy</strong> - AI tools, templates, courses & more<br>💰 <strong>Sell</strong> - List your products, keep 85-90%<br>🛠️ <strong>Build</strong> - Create AI tools with our help<br><br>We're focused on practical, revenue-generating solutions. Anything specific you want to know?";
+            return "DHIVE is an AI marketplace where you can:<br><br>🛒 <strong>Buy</strong> - AI tools, templates, courses & more<br>💰 <strong>Sell</strong> - List your products, keep 100%<br>🛠️ <strong>Build</strong> - Create AI tools with our help<br><br>We're focused on practical, revenue-generating solutions. Anything specific you want to know?";
         }
         
         // Payment

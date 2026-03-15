@@ -431,7 +431,7 @@ Reply to: ${email}
                             <div class="hero-stat-label">Products</div>
                         </div>
                         <div class="hero-stat">
-                            <div class="hero-stat-number">85%</div>
+                            <div class="hero-stat-number">100%</div>
                             <div class="hero-stat-label">Creator Revenue</div>
                         </div>
                         <div class="hero-stat">
@@ -490,7 +490,7 @@ Reply to: ${email}
                 <div class="container">
                     <div class="page-header">
                         <h1>Sell Your Products</h1>
-                        <p>Join our marketplace and earn 85-90% on every sale</p>
+                        <p>Join our marketplace and earn 100% on every sale</p>
                     </div>
                     <div class="form-container">
                         <p style="text-align: center; color: #64748b; margin-bottom: 24px;">
@@ -506,7 +506,7 @@ Reply to: ${email}
         
         // Mock seller stats
         const totalSales = 47500;
-        const monthlyEarnings = (totalSales * 0.85).toFixed(0);
+        const monthlyEarnings = (totalSales * 1.00).toFixed(0);
         const productsListed = 3;
         
         return `
@@ -523,7 +523,7 @@ Reply to: ${email}
                     </div>
                     <div class="stat-card green">
                         <div class="stat-number">R${parseInt(monthlyEarnings).toLocaleString()}</div>
-                        <div class="stat-label">Your Earnings (85%)</div>
+                        <div class="stat-label">Your Earnings (100%)</div>
                     </div>
                     <div class="stat-card orange">
                         <div class="stat-number">${productsListed}</div>
@@ -595,7 +595,7 @@ Reply to: ${email}
                     <div class="build-step">
                         <div class="build-step-icon">🚀</div>
                         <h3>Launch & Earn</h3>
-                        <p>List your product on DHIVE and start selling. You keep 85-90% of every sale. We handle the marketplace, you collect the revenue.</p>
+                        <p>List your product on DHIVE and start selling. You keep 100% of every sale. We handle the marketplace, you collect the revenue.</p>
                     </div>
                 </div>
                 
