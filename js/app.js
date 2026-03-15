@@ -227,12 +227,22 @@ const App = {
                     <button class="btn-wishlist ${isInWishlist ? 'active' : ''}" data-product-id="${product.id}" onclick="event.stopPropagation(); App.toggleWishlist(${product.id})">
                         ${isInWishlist ? '❤️' : '🤍'}
                     </button>
+                    <button class="btn-secondary" onclick="event.stopPropagation(); App.contactSeller(${product.id})">💬 Contact Seller</button>
                 </div>
             </div>
         `;
     },
     
     // Add product to cart
+    contactSeller(productId) {
+        const product = Products.getById(productId);
+        if (!product) return;
+        
+        const subject = encodeURIComponent(`Enquiry about: ${product.name}`);
+        const body = encodeURIComponent(`Hi,\n\nI'm interested in your product "${product.name}" listed on DHIVE.\n\nCould you please provide more information?\n\nThanks`);
+        
+        window.location.href = `mailto:trevorbosch4@gmail.com?subject=${subject}&body=${body}`;
+    },
     addToCart(productId) {
         const product = PRODUCTS.find(p => p.id === productId);
         if (product) {
@@ -320,6 +330,7 @@ const App = {
                 <button class="btn-primary" style="flex: 1;" onclick="App.addToCart(${product.id}); document.getElementById('productDetailModal').classList.remove('open'); Cart.showNotification('Added to cart!');">
                     Add to Cart
                 </button>
+                <button class="btn-secondary" style="flex: 1;" onclick="App.contactSeller(${product.id})">💬 Contact Seller</button>
                 <button class="btn-secondary" style="flex: 1;" onclick="document.getElementById('productDetailModal').classList.remove('open')">
                     Close
                 </button>
